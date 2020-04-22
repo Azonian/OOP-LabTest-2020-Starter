@@ -6,17 +6,14 @@ import processing.core.PApplet;
 import processing.data.Table;
 import processing.data.TableRow;
 
-public class Gantt extends PApplet
-{	
+public class Gantt extends PApplet {	
 	ArrayList<Task> tasks = new ArrayList<Task>();
 	
-	public void settings()
-	{
+	public void settings() {
 		size(800, 600);
 	}
 
-	public void loadTasks()
-	{
+	public void loadTasks() {
 	    Table taskTable = loadTable("tasks.csv","header");
         
 		for(TableRow tr:taskTable.rows())
@@ -27,17 +24,15 @@ public class Gantt extends PApplet
 	
 	}
 	
-	public void mousePressed()
-	{
+	public void mousePressed() {
 		println("Mouse pressed");	
 	}
 
-	public void mouseDragged()
-	{
+	public void mouseDragged() {
 		println("Mouse dragged");
 	}
 
-	public void drawLabledMarkers() {
+	public void displayLabledMarkers() {
 		/*
 		using a ruler heres the aprox distaces ratios of the screen:
 		
@@ -65,6 +60,19 @@ public class Gantt extends PApplet
 			text(i,xCord,border/2);
 		}
 	}
+
+	public void displayTasks() {
+		//maybe make own function to clean up mabye "displayTaskName"?
+		float xCord = width * 0.1f;
+		float yCord = width * 0.1f;
+		float yOffset = width * 0.05f;
+		textAlign(LEFT,CENTER);
+		for(int i = 0; i < tasks.size();i++)
+		{
+			Task currentTask = tasks.get(i);
+			text(currentTask.getDisplayName(),xCord,yCord + i * yOffset);
+		}
+	}
 	
 	public void setup() 
 	{
@@ -81,9 +89,12 @@ public class Gantt extends PApplet
 		}
 	}
 
+	
+
 	public void draw()
 	{			
 		background(0);
-		drawLabledMarkers();
+		displayLabledMarkers();
+		displayTasks();
 	}
 }
