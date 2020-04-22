@@ -53,6 +53,7 @@ public class Gantt extends PApplet {
 		
 		
 		stroke(0,0,100);
+		fill(0,0,100);
 		textAlign(CENTER,CENTER);
 		for(int i = 1;i <= 30;i++)
 		{
@@ -71,7 +72,7 @@ public class Gantt extends PApplet {
 		float textYCord = width * 0.1f;
 		float textYOffset = width * 0.05f;
 		
-		float rectYcord = width * 0.1f;
+		float rectYcord = width * 0.075f;
 		float rectHiegth = width * 0.05f;
 		
 		float rectRaius = 5;
@@ -80,7 +81,8 @@ public class Gantt extends PApplet {
 		for(int i = 0; i < tasks.size();i++)
 		{
 			Task currentTask = tasks.get(i);
-			stroke(0,100,0);
+			//stroke(0,100,0);
+			fill(0,0,100);
 			text(currentTask.getDisplayName(),textXcord,textYCord + i * textYOffset); //display task text on left side of marker lines
 			
 			noStroke();
