@@ -74,6 +74,9 @@ public class Gantt extends PApplet {
 			else//if where editing the end
 			{
 				//println("end");
+				taskToEdit.setEnd(
+				Math.max((int)(taskToEdit.getStart() + 1),(int)Math.min(30,(int)(map(mouseX,leftBorder,width - border,1,30))))
+				);
 			}
 		}
 	}
