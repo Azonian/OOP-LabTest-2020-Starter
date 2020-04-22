@@ -2,6 +2,8 @@ package ie.tudublin;
 
 import java.util.ArrayList;
 
+import java.lang.Math;
+
 import processing.core.PApplet;
 import processing.data.Table;
 import processing.data.TableRow;
@@ -42,14 +44,14 @@ public class Gantt extends PApplet {
 				println("mouseInBoxAt returned true");
 				startOrEnd = true;
 				taskToEdit = curentTask;
-				i = tasks.size();
+				i = tasks.size();//this is janky but works
 			}
 			else if(mouseInBoxAt(map(curentTask.getEnd() - 1,1,30,leftBorder,width - border),rectYcord + (rectHiegth * i)))
 			{
 				println("mouseInBoxAt returned true");
 				startOrEnd = false;
 				taskToEdit = curentTask;
-				i = tasks.size();
+				i = tasks.size();//this is janky but works
 			}
 			else
 			{
@@ -64,11 +66,14 @@ public class Gantt extends PApplet {
 		{
 			if(startOrEnd)//if where editing the start
 			{
-				println("start");
+				//println("start");
+				taskToEdit.setStart(
+				Math.min((int)(taskToEdit.getEnd() - 1),(int)Math.max(1,(int)(map(mouseX,leftBorder,width - border,1,30))))
+				);
 			}
 			else//if where editing the end
 			{
-				println("end");
+				//println("end");
 			}
 		}
 	}
@@ -76,11 +81,11 @@ public class Gantt extends PApplet {
 	public boolean mouseInBoxAt(float X, float Y){
 		float boxW = map(2,1,30,leftBorder,width - border) - map(1,1,30,leftBorder,width - border);
 		float boxH = width * 0.05f;
-		println("mouseInBoxAt called--------------------------------------------------------");
+		/*println("mouseInBoxAt called--------------------------------------------------------");
 		println("mouseX>X " + mouseX + " > "+ X + " :" + (mouseX>X) + "");
 		println("mouseX<(X+boxW) " + mouseX + " < "+ (X+boxW) + " :" + (mouseX < (X+boxW))+ "");
 		println("mouseX>Y " + mouseY + " > "+ Y + " :" + (mouseY>Y) + "");
-		println("mouseY<(X+boxH) " + mouseY + " < "+ (Y+boxH) + " :" + (mouseY < (Y+boxH)) + "");
+		println("mouseY<(X+boxH) " + mouseY + " < "+ (Y+boxH) + " :" + (mouseY < (Y+boxH)) + "");*/
 		if((mouseX>X)&&(mouseX<(X+boxW))&&(mouseY>Y)&&(mouseY<Y+boxH))
 		{
 			return true;
