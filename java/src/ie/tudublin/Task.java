@@ -44,6 +44,12 @@ public class Task extends PApplet
 		);
 	}
 	
+	public Task(){
+		this.displayName = "";
+		this.start = 0;
+		this.end = 0;
+	}
+	
 	public String toString()
 	{
 		return displayName + "\t" + start + "\t" + end;

@@ -10,6 +10,9 @@ public class Gantt extends PApplet {
 	ArrayList<Task> tasks = new ArrayList<Task>();
 	float leftBorder;
 	float border;
+	boolean startOrEnd = false;
+	Task nullTask = new Task();
+	Task taskToEdit = nullTask;
 	
 	public void settings() {
 		size(800, 600);
@@ -27,13 +30,55 @@ public class Gantt extends PApplet {
 	}
 	
 	public void mousePressed() {
-		println("Mouse pressed");	
+		
+		float rectYcord = width * 0.075f;
+		float rectHiegth = width * 0.05f;
+		
+		println("Mouse pressed");
+		for(int i = 0;i < tasks.size();i++) {
+			Task curentTask = tasks.get(i);
+			if(mouseInBoxAt(map(curentTask.getStart(),1,30,leftBorder,width - border),rectYcord + (rectHiegth * i)))
+			{
+				startOrEnd = true;
+				taskToEdit = curentTask;
+			}
+			else if(mouseInBoxAt(map(curentTask.getEnd() - 1,1,30,leftBorder,width - border),rectYcord + (rectHiegth * i)))
+			{
+				startOrEnd = false;
+				taskToEdit = curentTask;
+			}
+			else
+			{
+				taskToEdit = nullTask;
+			}
+		}
 	}
 
 	public void mouseDragged() {
 		println("Mouse dragged");
+		if(!(taskToEdit == nullTask))
+		{
+			if(startOrEnd)//if where editing the start
+			{
+				println("start");
+			}
+			else//if where editing the end
+			{
+				println("end");
+			}
+		}
 	}
-
+	
+	public boolean mouseInBoxAt(float X, float Y){
+		float boxW = map(1,1,30,leftBorder,width - border) - map(2,1,30,leftBorder,width - border);
+		float boxH = width * 0.05f;
+		if((mouseX>X)&&(mouseX<(X+boxW))&&(mouseY>Y)&&(mouseY<Y+boxH))
+		{
+			return true;
+		}
+		return false;
+	}
+	
 	public void displayLabledMarkers() {
 		/*
 		using a ruler heres the aprox distaces ratios of the screen:
