@@ -86,7 +86,7 @@ public class Gantt extends PApplet {
 			text(currentTask.getDisplayName(),textXcord,textYCord + i * textYOffset); //display task text on left side of marker lines
 			
 			noStroke();
-			fill(100,map(i,0,tasks.size(),0,100),100);
+			fill(map(i,0,tasks.size(),0,100),100,100);
 			//VV this is all a disaster zone clean it
 			rect(map(currentTask.getStart(),1,30,leftBorder,width - border),
 			rectYcord + (rectHiegth * i),
