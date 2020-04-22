@@ -3,10 +3,10 @@ package ie.tudublin;
 import processing.core.PApplet;
 import processing.data.TableRow;
 
-public class Gantt extends PApplet
+public class Task extends PApplet
 
 {
-	private string displayName;
+	private String displayName;
 	private int start;
 	private int end;
 	
@@ -32,7 +32,7 @@ public class Gantt extends PApplet
 	
 	public String toString()
 	{
-		return displayName + "\t" + startPosistion + "\t" + endPostion;
+		return displayName + "\t" + start + "\t" + end;
 	}
 	
 	
