@@ -30,10 +30,23 @@ public class Task extends PApplet
 		end = newEnd;
 	}
 	
+	public Task(String displayName, int start, int end) {
+		this.displayName = displayName;
+		this.start = start;
+		this.end = end;
+	}
+	
+	public Task(TableRow tr) {
+		this(
+			tr.getString("Task")
+			, tr.getInt("Start")
+			, tr.getInt("End")
+		);
+	}
+	
 	public String toString()
 	{
 		return displayName + "\t" + start + "\t" + end;
 	}
-	
 	
 }

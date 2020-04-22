@@ -26,7 +26,6 @@ public class Gantt extends PApplet
         }
 	
 	}
-
 	
 	public void mousePressed()
 	{
@@ -57,6 +56,6 @@ public class Gantt extends PApplet
 	public void draw()
 	{			
 		background(0);
-		drawLabledMarkers();
+		//drawLabledMarkers();
 	}
 }
