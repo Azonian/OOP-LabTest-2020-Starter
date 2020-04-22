@@ -50,7 +50,7 @@ public class Gantt extends PApplet {
 		like the math sugests cause im assuming it was a mesurment error
 		and that indeded value was 0.05*/
 		
-		stroke(100,100,100);
+		stroke(0,0,100);
 		textAlign(CENTER,CENTER);
 		for(int i = 1;i <= 30;i++)
 		{
@@ -62,21 +62,27 @@ public class Gantt extends PApplet {
 	}
 
 	public void displayTasks() {
-		//maybe make own function to clean up mabye "displayTaskName"?
+		//maybe break into multiple functions to clean up mabye "displayTaskName" and "display task box"?
+		
 		float xCord = width * 0.1f;
 		float yCord = width * 0.1f;
 		float yOffset = width * 0.05f;
+		
 		textAlign(LEFT,CENTER);
+		
 		for(int i = 0; i < tasks.size();i++)
 		{
 			Task currentTask = tasks.get(i);
-			text(currentTask.getDisplayName(),xCord,yCord + i * yOffset);
+			text(currentTask.getDisplayName(),xCord,yCord + i * yOffset); //display task text on left side of marker lines
+			
 		}
+		
+		
 	}
 	
 	public void setup() 
 	{
-		//colorMode()
+		colorMode(HSB, 100);
 		loadTasks();
 		printTasks();
 	}
