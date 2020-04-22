@@ -8,6 +8,8 @@ import processing.data.TableRow;
 
 public class Gantt extends PApplet {	
 	ArrayList<Task> tasks = new ArrayList<Task>();
+	float leftBorder;
+	float border;
 	
 	public void settings() {
 		size(800, 600);
@@ -44,11 +46,11 @@ public class Gantt extends PApplet {
 		text:midle is at 1 from top
 		*/
 		
-		float border = width * 0.05f;
-		float leftBorder = width * 0.2f;
+		
 		/*using 0.05f rather than 0.04761904761904761904761904761905
 		like the math sugests cause im assuming it was a mesurment error
 		and that indeded value was 0.05*/
+		
 		
 		stroke(0,0,100);
 		textAlign(CENTER,CENTER);
@@ -61,27 +63,42 @@ public class Gantt extends PApplet {
 		}
 	}
 
-	public void displayTasks() {
-		//maybe break into multiple functions to clean up mabye "displayTaskName" and "display task box"?
+	public void displayTasks() {//this is a mess clean it up
+		//maybe break into multiple functions to clean up mabye "displayTaskName" and "displayTaskRect"?
 		
-		float xCord = width * 0.1f;
-		float yCord = width * 0.1f;
-		float yOffset = width * 0.05f;
+		//rename these varibles to what they actulaty do
+		float textXcord = width * 0.1f;
+		float textYCord = width * 0.1f;
+		float textYOffset = width * 0.05f;
 		
+		float rectYcord = width * 0.1f;
+		float rectHiegth = width * 0.05f;
+		
+		float rectRaius = 5;
 		textAlign(LEFT,CENTER);
-		
+
 		for(int i = 0; i < tasks.size();i++)
 		{
 			Task currentTask = tasks.get(i);
-			text(currentTask.getDisplayName(),xCord,yCord + i * yOffset); //display task text on left side of marker lines
+			stroke(0,100,0);
+			text(currentTask.getDisplayName(),textXcord,textYCord + i * textYOffset); //display task text on left side of marker lines
 			
+			noStroke();
+			fill(100,map(i,0,tasks.size(),0,100),100);
+			//VV this is all a disaster zone clean it
+			rect(map(currentTask.getStart(),1,30,leftBorder,width - border),
+			rectYcord + (rectHiegth * i),
+			map(currentTask.getEnd(),1,30,leftBorder,width - border) - map(currentTask.getStart(),1,30,leftBorder,width - border),
+			rectHiegth,
+			rectRaius);
 		}
-		
-		
 	}
 	
 	public void setup() 
 	{
+		border = width * 0.05f;
+		leftBorder = width * 0.2f;
+		
 		colorMode(HSB, 100);
 		loadTasks();
 		printTasks();
